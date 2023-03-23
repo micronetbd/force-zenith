@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "ForceZenith",
+  "version": "1",
+  "web_accessible_resources": [
+    {
+      "resources": [],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "./src/content.js"
+      ]
+    }
+  ],
+  "action": {
+    "default_icon": "./Idle Icon1.png",
+    "default_title": "SalesForce",
+    "default_popup": "./src/index.html"
+  },
+  "background": {
+    "service_worker": "./src/background.js"
+  },
+  "permissions": [
+    "tabs"
+  ]
+}

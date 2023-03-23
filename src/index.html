@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/output.css">
+    <link rel="stylesheet" href="../assets/styles/salesforce-lightning-design-system-offline.min.css">
+    <link rel="icon" type="image/png" href="../icon.png">
+    <title>Sales Force</title>
+</head>
+
+<body class="w-[300px]">
+    <div class="flex justify-center mb-20">
+        <div class="w-full mx-4">
+            <!-- <img class="mx-auto w-60 my-10" src="../assets/images/Micronetbd_Logo.webp" alt="" srcset=""> -->
+            <img class="mx-auto w-60 my-10" src="../Logo.png" alt="" srcset="">
+            <!-- <img class="mx-auto w-30 my-10" src="../icon.png" alt="" srcset=""> -->
+            <form id="loginform">
+
+                <div class="slds-form ">
+                    <div class="slds-form-element slds-form-element_stacked">
+                        <label class="slds-form-element__label" for="form-element-01">Username</label>
+                        <div class="slds-form-element__control">
+                            <input type="text" name="username" value="" placeholder="Enter Your Username"
+                            class="slds-input" />
+                        </div>
+                    </div>
+                    <div class="slds-form-element slds-form-element_stacked">
+                        <label class="slds-form-element__label" for="form-element-01">Password</label>
+                        <div class="slds-form-element__control">
+                            <input type="password" name="password" value="" placeholder="Enter Your Password"
+                            class="slds-input" />
+                        </div>
+                    </div>
+                    <div class="slds-form-element slds-form-element_stacked">
+                        <div class="slds-form-element__control">
+                            <a class="slds-button slds-button_brand w-full mt-4" id="login">Login</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./axios.js"></script>
+<script src="./localCookie.js"></script>
+<script src="./api.js"></script>
+<script src="./index.js"></script>
+
+</html>
