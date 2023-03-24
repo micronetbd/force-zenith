@@ -34,8 +34,8 @@ document.forms.createTaskForm.addEventListener('submit', (event) => {
   const formProps = Object.fromEntries(formData);
   formProps.project_id = document.querySelector("#lookupProject").getAttribute('data-info')
   formProps.owner = document.querySelector("#lookupOwner").getAttribute('data-info')
-  formProps.minutes = 0;
-  formProps.hours = 0;
+  formProps.minutes = parseInt(formProps.minutes);
+  formProps.hours = parseInt(formProps.hours);
   formProps.start_date = formProps.start_date + " " + formProps.start_time + ":00";
   formProps.end_date = formProps.end_date + " " + formProps.end_time + ":00";
 

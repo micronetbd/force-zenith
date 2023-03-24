@@ -171,7 +171,7 @@ class="slds-illustration__fill-primary"></path>
                 </div>
                 <div class="flex justify-between bg-white p-3 gap-4">
                     <div class="flex-col">
-                        <div class="text-xl text-blue-500">${el.name.replace("name=", "")}</div>
+                        <div class="text-xl text-blue-500">${el.name.substring(0, 50)}</div>
                         <div>${el.project_name}</div>
                         <div class="flex  items-center truncate text-gray-500 font-sm" title="${el.description}">${el.description == null ? "" : el.description.substring(0, 70)}</div>
 

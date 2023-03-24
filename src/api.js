@@ -135,7 +135,7 @@ function createTask(formProps) {
         urlencoded.append("hours", formProps.hours);
         urlencoded.append("notes", formProps.notes);
         urlencoded.append("status", formProps.status);
-        if(formProps.end_date){
+        if (formProps.end_date) {
             urlencoded.append("end_date", formProps.end_date);
         }
 
@@ -171,40 +171,40 @@ function getTask(payload) {
     })
 }
 function editTask(editdata) {
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
 
-    // console.log('editdata', editdata)
-    var headers = {
-        'task_manager_id': getCookie("login")
-    };
-    // if (typeof editdata.description == "string") {
-    //     editdata.description = JSON.parse(editdata.description)
-    // } else {
-    //     editdata.description = JSON.stringify(editdata.description)
+        // console.log('editdata', editdata)
+        var headers = {
+            'task_manager_id': getCookie("login")
+        };
+        // if (typeof editdata.description == "string") {
+        //     editdata.description = JSON.parse(editdata.description)
+        // } else {
+        //     editdata.description = JSON.stringify(editdata.description)
 
-    // }
-    var urlencoded = new URLSearchParams();
-    urlencoded.append("task_id", editdata.task_id);
-    urlencoded.append("name", editdata.name);
-    urlencoded.append("type", editdata.type);
-    urlencoded.append("start_date", editdata.start_date);
-    urlencoded.append("owner", editdata.owner);
-    urlencoded.append("project_id", editdata.project_id);
-    urlencoded.append("hours", editdata.hours);
-    urlencoded.append("minutes", editdata.minutes);
-    urlencoded.append("notes", editdata.description);
-    urlencoded.append("status", editdata.status);
-    if(editdata.end_date){
-        urlencoded.append("end_date", editdata.end_date+":00");
-    }
-    makeHttpRequest('task', 'PUT', headers, urlencoded).then(result => {
-        if (result.success) {
-            resolve(result)
-        } else {
-            alert(JSON.stringify(result))
+        // }
+        var urlencoded = new URLSearchParams();
+        urlencoded.append("task_id", editdata.task_id);
+        urlencoded.append("name", editdata.name);
+        urlencoded.append("type", editdata.type);
+        urlencoded.append("start_date", editdata.start_date);
+        urlencoded.append("owner", editdata.owner);
+        urlencoded.append("project_id", editdata.project_id);
+        urlencoded.append("hours", editdata.hours);
+        urlencoded.append("minutes", editdata.minutes);
+        urlencoded.append("notes", editdata.description);
+        urlencoded.append("status", editdata.status);
+        if (editdata.end_date) {
+            urlencoded.append("end_date", editdata.end_date + ":00");
         }
+        makeHttpRequest('task', 'PUT', headers, urlencoded).then(result => {
+            if (result.success) {
+                resolve(result)
+            } else {
+                alert(JSON.stringify(result))
+            }
+        })
     })
-})
 
 }
 function search(url) {
@@ -217,12 +217,13 @@ function search(url) {
                 if (result.success) {
                     resolve(result)
                 } else {
-                    alert(JSON.stringify(result))
+                    console.log(result);
+                    // alert(JSON.stringify(result))
                 }
             })
             .catch(error => {
                 console.error(error);
-                alert(error.message);
+                // alert(error.message);
             });
 
     })
