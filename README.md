@@ -4,13 +4,13 @@
 
 To install ForceZenith, please follow the instructions below:
 
-Download the ForceZenith zip file from [Insert Download URL Here]
-Extract the zip file to a location of your choice
-Open Google Chrome and type "chrome://extensions" in the address bar
-Turn on Developer mode by toggling the switch in the top right corner
-Click on the "Load unpacked" button in the top left corner
-Navigate to the extracted ForceZenith folder and click "Select Folder"
-Once the installation is complete, ForceZenith will be available in the top right corner of your Chrome browser. Simply click on the icon to start using the plugin.
+1. Download the ForceZenith zip file from [Insert Download URL Here]
+2. Extract the zip file to a location of your choice
+3. Open Google Chrome and type "chrome://extensions" in the address bar
+4. Turn on Developer mode by toggling the switch in the top right corner
+5. Click on the "Load unpacked" button in the top left corner
+6. Navigate to the extracted ForceZenith folder and click "Select Folder"
+7. Once the installation is complete, ForceZenith will be available in the top right corner of your Chrome browser. Simply click on the icon to start using the plugin.
 
 Please note that ForceZenith also syncs all tasks and projects back and forth in Salesforce. This means that all tasks created using ForceZenith will be automatically synced with Salesforce, and all tasks created in Salesforce will be available within the plugin.
 
