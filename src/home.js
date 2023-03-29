@@ -63,7 +63,7 @@ document.getElementById("lookupProject").onkeyup = (e) => {
             redirect: 'follow'
         };
 
-        fetch("https://micronetbd--uat.sandbox.my.salesforce-sites.com/services/apexrest/project?search_string=" + value, requestOptions)
+        fetch("https://micronetbd.my.salesforce-sites.com/services/apexrest/project?search_string=" + value, requestOptions)
             .then(response => response.text())
             .then(result => {
                 result = JSON.parse(result)
@@ -112,6 +112,7 @@ document.getElementById("lookupOwner").onkeyup = (e) => {
     otimerId = setTimeout(() => {
 
         const value = e.target.value;
+        console.log('value: ', value);
         if (value === '') {
             document.getElementById("lookupOwnerList").style.display = "none";
             taskList.owner = getCookie("login");
@@ -128,7 +129,7 @@ document.getElementById("lookupOwner").onkeyup = (e) => {
             headers: myHeaders,
             redirect: 'follow'
         };
-        fetch("https://micronetbd--uat.sandbox.my.salesforce-sites.com/services/apexrest/user?search_string=" + value, requestOptions)
+        fetch("https://micronetbd.my.salesforce-sites.com/services/apexrest/user?search_string=" + value, requestOptions)
             .then(response => response.text())
             .then(result => {
                 result = JSON.parse(result)
