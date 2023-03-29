@@ -12,29 +12,68 @@
 </head>
 
 <body class="w-[600px]">
-    <div class="flex p-4 bg-white">
+    <div class="flex p-2 bg-white">
         <div class="grow">
             <img class="w-40" src="../Logo.png" alt="" srcset="">
         </div>
         <div class="flex items-center gap-x-2">
-            <span id="refreshList" class="slds-icon_container slds-icon-utility-announcement slds-current-color"
+            <!-- <span id="refreshList" class="slds-icon_container slds-icon-utility-announcement slds-current-color"
                 title="To Refresh this page ! ">
                 <svg class="slds-icon slds-icon_small" aria-hidden="true">
                     <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#sync"></use>
                 </svg>
                 <span class="slds-assistive-text">To Refresh this page ! </span>
+            </span> -->
+
+            <span class="slds-badge slds-badge_inverse">
+                <span class="slds-badge__icon slds-badge__icon_left slds-badge__icon_inverse">
+                    <span class="slds-icon_container slds-icon-utility-clock slds-current-color"
+                        title="Description of icon when needed">
+                        <svg class="slds-icon slds-icon_xx-small" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#clock"></use>
+                        </svg>
+                    </span>
+                </span>
+                <div id="totalTimeTracked" style="font-size: 15px;">0:0</div>
             </span>
-            <a class="slds-button slds-button_brand" style="height: 25px;" id="createPage" href="./createTask.html">New Task</a>
+
+            <a class="slds-button slds-button_icon slds-button_icon-brand" aria-live="assertive" id="refreshList"
+                aria-pressed="false">
+                <svg class="slds-button__icon" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#sync"></use>
+                </svg>
+            </a>
+            <a class="slds-button slds-button_icon slds-button_icon-brand" aria-live="assertive" id="createPage" href="./createTask.html"
+                aria-pressed="false">
+                <svg class="slds-button__icon" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#task"></use>
+                </svg>
+            </a>
+            <a class="slds-button slds-button_icon slds-button_icon-brand" aria-live="assertive" id="projectPage" href="./createProject.html"
+                aria-pressed="false">
+                <svg class="slds-button__icon" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#light_bulb"></use>
+                </svg>
+            </a>
+            <a class="slds-button slds-button_icon slds-button_icon-brand" aria-live="assertive" id="logout"
+                aria-pressed="false">
+                <svg class="slds-button__icon" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#power"></use>
+                </svg>
+            </a>
+
+
+            <!-- <a class="slds-button slds-button_brand" style="height: 25px;" id="createPage" href="./createTask.html">New Task</a>
             <a class="slds-button slds-button_brand" style="height: 25px;" id="projectPage" href="./createProject.html">New Project</a>
-            <a class="slds-button slds-button_brand" style="height: 25px;" id="logout">Log Out</a>
+            <a class="slds-button slds-button_brand" style="height: 25px;" id="logout">Log Out</a> -->
         </div>
     </div>
-    <div class=" m-auto mt-4 mx-4">
-        <div class="flex justify-around text-xl">
-            <div class="grow">Total Time</div>
-            <div id="totalTimeTracked">0:0</div>
+    <div class=" m-auto mt-2 mx-4">
+        <div class="justify-around text-xl" style="text-align: right;padding-top: 5px;">
+            <!-- <div class="grow">Total Time</div> -->
+            
         </div>
-        <div class="slds-form my-4">
+        <div class="slds-form">
             <form id="filter">
                 <div class="slds-form-element__control flex gap-4">
                     <div class="slds-form-element w-full">
@@ -122,7 +161,7 @@
                 </div>
             </form>
         </div>
-        <div id="TaskList" class="my-4"></div>
+        <div id="TaskList" class="my-2"></div>
     </div>
     </div>
 </body>

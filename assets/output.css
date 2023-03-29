@@ -541,6 +541,10 @@ video {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+.my-2 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
 
 .mb-20 {
   margin-bottom: 5rem;
@@ -705,8 +709,8 @@ video {
 }
 
 .text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+  font-size: 1.15rem;
+  line-height: 1.55rem;
 }
 
 .text-blue-500 {

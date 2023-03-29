@@ -68,12 +68,47 @@ function getAllTasks(owner, projects, startDate, endDate) {
                     data[i].users[j].tasks[k].project_name = data[i].project_name
                     data[i].users[j].tasks[k].project_id = data[i].project_id
                     data[i].users[j].tasks[k].user_name = data[i].users[j].user_name
+                    data[i].users[j].tasks[k].user_init = getInitials(data[i].users[j].user_name, " ")
+                    let statusClass = 'slds-button_neutral';
+                    switch (data[i].users[j].tasks[k].status) {
+                        case 'Paused':
+                            statusClass = 'slds-button_text-destructive';
+                            break;
+                        case 'Completed':
+                            statusClass = 'slds-button_success';
+                            break;
+                        case 'Planned':
+                            statusClass = 'slds-button_outline-brand';
+                            break;
+                        case 'In Progress':
+                            statusClass = 'slds-button_brand';
+                            break;
+                        
+                        default:
+                            statusClass = 'slds-button_neutral';
+                            break;
+                    }
+                    data[i].users[j].tasks[k].statusClass = statusClass
                     data[i].users[j].tasks[k].user_id = data[i].users[j].user_id
                     tasks.push(data[i].users[j].tasks[k])
                 }
             }
         }
         return tasks;
+    }
+    function getInitials( name,delimeter ) {
+        if( name ) {
+            var array = name.split( delimeter );
+            switch ( array.length ) {
+                case 1:
+                    return array[0].charAt(0).toUpperCase();
+                    break;
+                default:
+                    return array[0].charAt(0).toUpperCase() + array[ array.length -1 ].charAt(0).toUpperCase();
+            }
+        }
+        return false;
+    
     }
     return new Promise((resolve, reject) => {
         var headers = {
@@ -173,7 +208,7 @@ function getTask(payload) {
 function editTask(editdata) {
     return new Promise((resolve, reject) => {
 
-        // console.log('editdata', editdata)
+        console.log('editdata', editdata)
         var headers = {
             'task_manager_id': getCookie("login")
         };

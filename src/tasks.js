@@ -133,10 +133,10 @@ class="slds-illustration__fill-primary"></path>
             document.getElementById("TaskList").innerHTML = '';
             this.data.forEach((el, i) => {
                 let html = `
-                <div class="mt-6">
-                <div class="flex bg-gray-200 text-lg p-2 status" data-info="${el.task_id},${el.status}">
-                    <div class="grow text-sm">${el.start_date} / ${el.end_date}</div>
-                    <div id="clock${el.task_id}" class="text-sm"><span>Today:</span> ${el.hours}:${el.minutes}</div>
+                <div class="mt-2">
+                <div class="flex bg-gray-200 text-lg p-1 status" data-info="${el.task_id},${el.status}">
+                    <div class="grow text-sm p-1" style="margin: auto;">${el.start_date} ${el.end_date ? ' / ' : '' } ${el.end_date}</div>
+                    <div id="clock${el.task_id}" class="text-sm" style="margin: auto;">${el.hours}:${el.minutes}</div>
                     <span   id="edit${el.task_id},${el.start_date},${el.end_date},${el.user_name},${el.user_id},${el.project_id},${el.description},${el.name},${el.type},${el.hours},${el.minutes},${el.status}" class=" click slds-icon_container slds-icon-utility-announcement slds-current-color mx-2" 
                     title="To Edit This Task">
                     <svg class="slds-icon slds-icon_small" style="width:15px;fill: #0176d3;" aria-hidden="true">
@@ -169,16 +169,20 @@ class="slds-illustration__fill-primary"></path>
                     <span class="slds-assistive-text">To Delete This Task</span>
                 </span>
                 </div>
-                <div class="flex justify-between bg-white p-3 gap-4">
+                <div class="flex justify-between bg-white p-3 gap-4" style="padding-top: 0;">
                     <div class="flex-col">
                         <div class="text-xl text-blue-500">${el.name.substring(0, 50)}</div>
                         <div>${el.project_name}</div>
                         <div class="flex  items-center truncate text-gray-500 font-sm" title="${el.description}">${el.description == null ? "" : el.description.substring(0, 70)}</div>
 
                         </div>
-                        <div class="flex flex-col  items-center gap-x-2 justify-between ">
-                        <a class="slds-button slds-button_success w-full" style="height: 25px;">${el.user_name}</a>
-                        <a class="slds-button slds-button_brand w-full"  style="height: 25px;">${el.status}</a>
+                        <div class="flex flex-col  items-center gap-x-2 p-1">
+                        <span class="slds-avatar slds-avatar_circle">
+                            <abbr class="slds-avatar__initials slds-avatar__initials_inverse" title="Person name">
+                                ${el.user_init}
+                            </abbr>
+                        </span>
+                        <a class="slds-button ${el.statusClass} w-full"  style="height: 25px;margin-top: 10px;white-space: nowrap;">${el.status}</a>
                         
                         </div>
                         </div>

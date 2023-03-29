@@ -37,6 +37,7 @@ taskstatus.forEach(el => {
 
 const entries = urlParams.entries();
 const params = paramsToObject(entries);
+
 // if (params.status === 'Completed') {
 //   document.getElementById("endtime").style.display = 'flex';
 // }
@@ -55,9 +56,15 @@ if (params.end_date === "") {
   form["end_date"].value = ''
   form["end_time"].value = ''
 }
+form["name"].value = params.name;
 form["owner"].value = params.user_name;
 form["status"].value = params.status;
 form["description"].value = params.description;
+
+if(params.task_id){
+    form["hours"].value = params.hours;
+    form["minutes"].value = params.minutes;
+}
 document.getElementById("taskstatus").value = params.status;
 // form["description"].value = JSON.parse(params.description.replace(/&quot;/g, '"'));
 // console.log('form', JSON.stringify(params.description))
@@ -106,8 +113,9 @@ document.forms.editTaskForm.addEventListener('submit', (event) => {
   var form = document.querySelector('form')
   const formData = new FormData(form);
   const formProps = Object.fromEntries(formData);
+  console.log('formProps: ', formProps);
   var editdata = {};
-
+  editdata.name = formProps.name;
   editdata.owner = document.querySelector("#lookupOwner").getAttribute('data-info');
   editdata.start_date = formProps.start_date + " " + formProps.start_time;
   editdata.end_date = formProps.end_date + " " + formProps.end_time;
@@ -115,10 +123,9 @@ document.forms.editTaskForm.addEventListener('submit', (event) => {
   editdata.status = formProps.status;
   editdata.project_id = params.project_id;
   editdata.type = params.type;
-  editdata.name = params.name;
   editdata.task_id = params.task_id;
-  editdata.hours = parseInt(params.hours);
-  editdata.minutes = parseInt(params.minutes);
+  editdata.hours = formProps.hours; //parseInt(params.hours);
+  editdata.minutes = formProps.minutes; //parseInt(params.minutes);
   // console.log(editdata, formProps.end_date, formProps.end_time, new Date(editdata.end_date))
   if (new Date(editdata.end_date) == "Invalid Date") {
     delete editdata.end_date;
