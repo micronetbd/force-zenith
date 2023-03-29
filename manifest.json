@@ -1,7 +1,14 @@
 {
   "manifest_version": 3,
   "name": "ForceZenith",
-  "version": "1",
+  "version": "1.0",
+  "description": "ForceZenith, designed to help you and your team stay on top of your tasks, deadlines, and projects, all from the convenience of browser",
+  "icons" : {
+    "16": "/assets/logo/logo_16x16.png",
+    "32": "/assets/logo/logo_32x32.png",
+    "48": "/assets/logo/logo_48x48.png",
+    "128": "/assets/logo/logo_128x128.png"
+  },
   "web_accessible_resources": [
     {
       "resources": [],
@@ -22,7 +29,7 @@
   ],
   "action": {
     "default_icon": "./Idle Icon1.png",
-    "default_title": "SalesForce",
+    "default_title": "ForceZenith",
     "default_popup": "./src/index.html"
   },
   "background": {
