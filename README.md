@@ -1,10 +1,10 @@
-# force-zenith
+# ForceZenith
 
  ForceZenith, designed to help you and your team stay on top of your tasks, deadlines, and projects, all from the convenience of your browser.
 
 To install ForceZenith, please follow the instructions below:
 
-1. Download the ForceZenith zip file from [Insert Download URL Here]
+1. Download the ForceZenith zip file from Git
 2. Extract the zip file to a location of your choice
 3. Open Google Chrome and type "chrome://extensions" in the address bar
 4. Turn on Developer mode by toggling the switch in the top right corner
