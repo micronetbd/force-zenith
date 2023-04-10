@@ -112,7 +112,6 @@ document.getElementById("lookupOwner").onkeyup = (e) => {
     otimerId = setTimeout(() => {
 
         const value = e.target.value;
-        console.log('value: ', value);
         if (value === '') {
             document.getElementById("lookupOwnerList").style.display = "none";
             taskList.owner = getCookie("login");

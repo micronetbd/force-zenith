@@ -1,5 +1,10 @@
 var Interval = {}
 var timeInterval = {}
+chrome.action.onClicked.addListener( (tab)=> {
+        chrome.tabs.sendMessage(tab.id, {greeting: "hello"}, function(response) {
+              console.log(response);
+        });
+})
 setInterval(() => {
     if (Object.keys(Interval).length > 0) {
         chrome.action.setIcon({

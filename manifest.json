@@ -11,7 +11,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": [],
+      "resources": ["src/index.html"],
       "matches": [
         "<all_urls>"
       ]
@@ -29,8 +29,7 @@
   ],
   "action": {
     "default_icon": "./Idle Icon1.png",
-    "default_title": "ForceZenith",
-    "default_popup": "./src/index.html"
+    "default_title": "ForceZenith"
   },
   "background": {
     "service_worker": "./src/background.js"
