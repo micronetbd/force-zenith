@@ -14,20 +14,35 @@ document.getElementById("logout").onclick = () => {
 }
 try {
     chrome.runtime.onMessage.addListener(function (message) {
-        // console.log(message.message.data.task_id)
-        let index = taskList.getIndexFromId(message.message.data.task_id)
-        // console.log(taskList.data[index])
-        console.log(index,`${message.hoursElapsed}h ${message.minutesElapsed}m ${message.secondsElapsed}s`,document.getElementById("clock" + message.message.data.task_id))
-        if(taskList.data[index]){
-            taskList.data[index].hours = message.hoursElapsed;
-            taskList.data[index].minutes = message.minutesElapsed;
-            document.getElementById("clock" + message.message.data.task_id).innerHTML = `${message.hoursElapsed}h ${message.minutesElapsed}m ${message.secondsElapsed}s`;
-        }
+        // Check if message, message.message, and message.message.data are defined
+        if (message && message.message && message.message.data) {
+            let index = taskList.getIndexFromId(message.message.data.task_id);
 
+            // Additional console logs for debugging
+            console.log('Index:', index);
+            console.log('Time:', `${message.hoursElapsed}h ${message.minutesElapsed}m ${message.secondsElapsed}s`);
+            console.log('Element:', document.getElementById("clock" + message.message.data.task_id));
+
+            if (taskList.data[index]) {
+                taskList.data[index].hours = message.hoursElapsed;
+                taskList.data[index].minutes = message.minutesElapsed;
+                let clockElement = document.getElementById("clock" + message.message.data.task_id);
+                if (clockElement) {
+                    clockElement.innerHTML = `${message.hoursElapsed}h ${message.minutesElapsed}m ${message.secondsElapsed}s`;
+                } else {
+                    console.error('Clock element not found for task_id:', message.message.data.task_id);
+                }
+            } else {
+                console.error('Task not found in taskList.data for index:', index);
+            }
+        } else {
+            console.error('Invalid message format:', message);
+        }
     });
 } catch (error) {
     console.error('Error handling message:', error);
 }
+
 
 
 document.getElementById("start_date").onchange = () => {
