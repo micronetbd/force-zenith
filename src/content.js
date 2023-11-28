@@ -26,3 +26,6 @@ substack.style.border = "none";
 substack.style.display = "none";
 substack.style.right = 0;
 document.body.before(substack);
+
+// Notify background.js that content.js has loaded
+chrome.runtime.sendMessage({ contentScriptReady: true });

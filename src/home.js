@@ -12,36 +12,69 @@ document.getElementById("logout").onclick = () => {
     chrome.runtime.sendMessage({ name: 'logout' });
     window.location = "./index.html"
 }
-try {
-    chrome.runtime.onMessage.addListener(function (message) {
-        // Check if message, message.message, and message.message.data are defined
-        if (message && message.message && message.message.data) {
-            let index = taskList.getIndexFromId(message.message.data.task_id);
+// try {
+//     chrome.runtime.onMessage.addListener(function (message) {
+//         // console.log(message.message.data.task_id)
+//         let index = taskList.getIndexFromId(message.message.data.task_id)
+//         // console.log(taskList.data[index])
+//         console.log(index,`${message.hoursElapsed}h ${message.minutesElapsed}m ${message.secondsElapsed}s`,document.getElementById("clock" + message.message.data.task_id))
+//         if(taskList.data[index]){
+//             taskList.data[index].hours = message.hoursElapsed;
+//             taskList.data[index].minutes = message.minutesElapsed;
+//             document.getElementById("clock" + message.message.data.task_id).innerHTML = `${message.hoursElapsed}h ${message.minutesElapsed}m ${message.secondsElapsed}s`;
+//         }
 
-            // Additional console logs for debugging
-            console.log('Index:', index);
-            console.log('Time:', `${message.hoursElapsed}h ${message.minutesElapsed}m ${message.secondsElapsed}s`);
-            console.log('Element:', document.getElementById("clock" + message.message.data.task_id));
+//     });
+// } catch (error) {
+//     console.error('Error handling message:', error);
+// }
 
-            if (taskList.data[index]) {
-                taskList.data[index].hours = message.hoursElapsed;
-                taskList.data[index].minutes = message.minutesElapsed;
-                let clockElement = document.getElementById("clock" + message.message.data.task_id);
+chrome.runtime.onMessage.addListener(function (received) {
+    console.log('Received message:', received);
+
+    // Deconstruct the received object to get the message and timing details
+    const { message, hoursElapsed, minutesElapsed, secondsElapsed } = received;
+
+    if (message) {
+        // Check for the 'contentScriptReady' message and acknowledge it
+        if (message.contentScriptReady) {
+            console.log('Content script is ready.');
+            return; // Early return if it's just the content script readiness confirmation
+        }
+
+        // Check for the greeting message and acknowledge it
+        if (message.greeting === 'hello') {
+            console.log('Greeting message received.');
+            return; // Early return if it's just the greeting message
+        }
+
+        // Handle messages with the expected structure for task management
+        if (message.name === 'startTracking' && message.data) {
+            let index = taskList.getIndexFromId(message.data.task_id);
+            if (index !== -1 && taskList.data[index]) {
+                let clockElement = document.getElementById("clock" + message.data.task_id);
                 if (clockElement) {
-                    clockElement.innerHTML = `${message.hoursElapsed}h ${message.minutesElapsed}m ${message.secondsElapsed}s`;
+                    // Provide default values if any property is undefined
+                    const hours = hoursElapsed !== undefined ? hoursElapsed : '0';
+                    const minutes = minutesElapsed !== undefined ? minutesElapsed : '0';
+                    const seconds = secondsElapsed !== undefined ? secondsElapsed : '0';
+                    clockElement.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
                 } else {
-                    console.error('Clock element not found for task_id:', message.message.data.task_id);
+                    console.error('Clock element not found for task_id:', message.data.task_id);
                 }
             } else {
                 console.error('Task not found in taskList.data for index:', index);
             }
         } else {
-            console.error('Invalid message format:', message);
+            // Log a detailed error message with the actual object contents
+            console.error('Invalid message format:', JSON.stringify(received, null, 2));
         }
-    });
-} catch (error) {
-    console.error('Error handling message:', error);
-}
+    }
+});
+
+
+
+
 
 
 

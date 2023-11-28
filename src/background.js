@@ -1,10 +1,19 @@
 var Interval = {}
 var timeInterval = {}
-chrome.action.onClicked.addListener( (tab)=> {
-        chrome.tabs.sendMessage(tab.id, {greeting: "hello"}, function(response) {
-              console.log(response);
+chrome.action.onClicked.addListener((tab) => {
+    // Ensure that the tab is not a new tab or special page
+    if (tab.url && !tab.url.startsWith('chrome://') && !tab.url.startsWith('chrome-extension://')) {
+        chrome.tabs.sendMessage(tab.id, { greeting: "hello" }, function(response) {
+            if (chrome.runtime.lastError) {
+                // Handle the error
+                console.error('Error sending message:', chrome.runtime.lastError.message);
+            } else {
+                console.log(response);
+            }
         });
-})
+    }
+});
+
 setInterval(() => {
     if (Object.keys(Interval).length > 0) {
         chrome.action.setIcon({
@@ -63,8 +72,27 @@ function trackTime(message) {
         }, 6000);
     }
 }
+// function sendtime(message) {
+//     const startTimestamp = Date.now() - (message.data.hours * 3600000) - (message.data.minutes * 60000) - (0 * 1000);
+//     let elapsedSeconds = 0;
+//     if (!timeInterval['time' + message.data.task_id]) {
+//         timeInterval['time' + message.data.task_id] = setInterval(() => {
+//             elapsedSeconds = Math.floor((Date.now() - startTimestamp) / 1000);
+//             const hoursElapsed = Math.floor(elapsedSeconds / 3600);
+//             const minutesElapsed = Math.floor((elapsedSeconds - (hoursElapsed * 3600)) / 60);
+//             const secondsElapsed = elapsedSeconds - (hoursElapsed * 3600) - (minutesElapsed * 60);
+//             try {
+//                 chrome.runtime.sendMessage({ message, hoursElapsed, minutesElapsed, secondsElapsed });
+//             } catch (error) {
+//                 console.log(error)
+//             }
+//             // console.log(timeInterval,message)
+
+//         }, 1000);
+//     }
+// }
 function sendtime(message) {
-    const startTimestamp = Date.now() - (message.data.hours * 3600000) - (message.data.minutes * 60000) - (0 * 1000);
+    const startTimestamp = Date.now() - (message.data.hours * 3600000) - (message.data.minutes * 60000);
     let elapsedSeconds = 0;
     if (!timeInterval['time' + message.data.task_id]) {
         timeInterval['time' + message.data.task_id] = setInterval(() => {
@@ -72,20 +100,35 @@ function sendtime(message) {
             const hoursElapsed = Math.floor(elapsedSeconds / 3600);
             const minutesElapsed = Math.floor((elapsedSeconds - (hoursElapsed * 3600)) / 60);
             const secondsElapsed = elapsedSeconds - (hoursElapsed * 3600) - (minutesElapsed * 60);
-            try {
-                chrome.runtime.sendMessage({ message, hoursElapsed, minutesElapsed, secondsElapsed });
-            } catch (error) {
-                console.log(error)
-            }
-            // console.log(timeInterval,message)
 
+            try {
+                chrome.runtime.sendMessage({
+                    message: {
+                        data: {
+                            task_id: message.data.task_id,
+                            hours: hoursElapsed,
+                            minutes: minutesElapsed,
+                            seconds: secondsElapsed
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error sending time update message:', error);
+            }
         }, 1000);
     }
 }
 
 
 
+
+
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.contentScriptReady) {
+        console.log('Content script has loaded in tab:', sender.tab.id);
+    }
+    
     if (message.name === 'startTracking') {
         console.log(message)
 
