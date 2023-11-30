@@ -29,48 +29,46 @@ document.getElementById("logout").onclick = () => {
 //     console.error('Error handling message:', error);
 // }
 
-chrome.runtime.onMessage.addListener(function (received) {
-    console.log('Received message:', received);
+try {
+    chrome.runtime.onMessage.addListener(function (message) {
+        console.log('Received message:', message);
 
-    // Deconstruct the received object to get the message and timing details
-    const { message, hoursElapsed, minutesElapsed, secondsElapsed } = received;
+        // Check if message.message and message.message.data exist
+        if (message.message && message.message.data) {
+            let index = taskList.getIndexFromId(message.message.data.task_id);
+            console.log('Task index:', index);
 
-    if (message) {
-        // Check for the 'contentScriptReady' message and acknowledge it
-        if (message.contentScriptReady) {
-            console.log('Content script is ready.');
-            return; // Early return if it's just the content script readiness confirmation
-        }
+            if (taskList.data[index]) {
+                console.log('Found task in taskList.data:', taskList.data[index]);
 
-        // Check for the greeting message and acknowledge it
-        if (message.greeting === 'hello') {
-            console.log('Greeting message received.');
-            return; // Early return if it's just the greeting message
-        }
+                // Logging each time value individually
+                console.log('Hours:', message.hoursElapsed);
+                console.log('Minutes:', message.minutesElapsed);
+                console.log('Seconds:', message.secondsElapsed);
 
-        // Handle messages with the expected structure for task management
-        if (message.name === 'startTracking' && message.data) {
-            let index = taskList.getIndexFromId(message.data.task_id);
-            if (index !== -1 && taskList.data[index]) {
-                let clockElement = document.getElementById("clock" + message.data.task_id);
+                taskList.data[index].hours = message.hoursElapsed;
+                taskList.data[index].minutes = message.minutesElapsed;
+
+                const clockElement = document.getElementById("clock" + message.message.data.task_id);
+                console.log('Clock element:', clockElement);
+
                 if (clockElement) {
-                    // Provide default values if any property is undefined
-                    const hours = received.hoursElapsed !== undefined ? received.hoursElapsed : '0';
-                    const minutes = received.minutesElapsed !== undefined ? received.minutesElapsed : '0';
-                    const seconds = received.secondsElapsed !== undefined ? received.secondsElapsed : '0';
-                    clockElement.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+                    clockElement.innerHTML = `${message.hoursElapsed}h ${message.minutesElapsed}m ${message.secondsElapsed}s`;
+                    console.log('Updated clock innerHTML:', clockElement.innerHTML);
                 } else {
-                    console.error('Clock element not found for task_id:', message.data.task_id);
+                    console.error('Clock element not found for task_id:', message.message.data.task_id);
                 }
             } else {
                 console.error('Task not found in taskList.data for index:', index);
             }
         } else {
-            // Log a detailed error message with the actual object contents
-            console.error('Invalid message format:', JSON.stringify(received, null, 2));
+            console.log('Message does not contain expected structure:', message);
         }
-    }
-});
+    });
+} catch (error) {
+    console.error('Error handling message:', error);
+}
+
 
 
 document.getElementById("start_date").onchange = () => {
