@@ -55,9 +55,9 @@ chrome.runtime.onMessage.addListener(function (received) {
                 let clockElement = document.getElementById("clock" + message.data.task_id);
                 if (clockElement) {
                     // Provide default values if any property is undefined
-                    const hours = hoursElapsed !== undefined ? hoursElapsed : '0';
-                    const minutes = minutesElapsed !== undefined ? minutesElapsed : '0';
-                    const seconds = secondsElapsed !== undefined ? secondsElapsed : '0';
+                    const hours = received.hoursElapsed !== undefined ? received.hoursElapsed : '0';
+                    const minutes = received.minutesElapsed !== undefined ? received.minutesElapsed : '0';
+                    const seconds = received.secondsElapsed !== undefined ? received.secondsElapsed : '0';
                     clockElement.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
                 } else {
                     console.error('Clock element not found for task_id:', message.data.task_id);
@@ -73,11 +73,6 @@ chrome.runtime.onMessage.addListener(function (received) {
 });
 
 
-
-
-
-
-
 document.getElementById("start_date").onchange = () => {
     taskList.startDate = new Date(document.getElementById("start_date").value).toISOString().substr(0, 10)
     taskList.getAll(false)
@@ -86,7 +81,6 @@ document.getElementById("end_date").onchange = () => {
     taskList.endDate = new Date(document.getElementById("end_date").value).toISOString().substr(0, 10)
     taskList.getAll(false)
 }
-
 
 document.getElementById("lookupProject").onkeyup = (e) => {
     let ptimerId;
