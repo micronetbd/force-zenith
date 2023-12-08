@@ -203,7 +203,7 @@ document.getElementById("logout").onclick = () => {
 
 try {
     chrome.runtime.onMessage.addListener(function (message) {
-        console.log('Received message:', message);
+        // console.log('Received message:', message);
         
         // Check if message.message and message.message.data exist
         if (message.message && message.message.data) {
@@ -217,7 +217,7 @@ try {
                 
                 if (clockElement) {
                     clockElement.innerHTML = `${message.hoursElapsed}h ${message.minutesElapsed}m ${message.secondsElapsed}s`;
-                    console.log('Updated clock innerHTML:', clockElement.innerHTML);
+                    // console.log('Updated clock innerHTML:', clockElement.innerHTML);
                 } else {
                     console.error('Clock element not found for task_id:', message.message.data.task_id);
                 }

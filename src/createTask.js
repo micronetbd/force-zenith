@@ -146,7 +146,3 @@ document.getElementById("lookupProject").onkeyup = (e) => {
   }, delay)
 
 }
-
-
-
-

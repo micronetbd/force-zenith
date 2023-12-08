@@ -1,159 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../assets/output.css" />
-        <link rel="stylesheet" href="../assets/styles/salesforce-lightning-design-system-offline.min.css" />
-        <link rel="icon" type="image/png" href="../icon.png" />
-        <title>Create Task</title>
-    </head>
 
-    <body class="mb-4">
-        <div class="flex p-4 bg-white">
-            <div class="grow"><img class="w-40" src="../Logo.png" alt="" srcset="" /></div>
-            <div class="flex items-center gap-x-2">
-                <a class="slds-button slds-button_brand" href="./home.html">Back</a>
-            </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/output.css" />
+    <link rel="stylesheet" href="../assets/styles/salesforce-lightning-design-system-offline.min.css" />
+    <link rel="icon" type="image/png" href="../icon.png" />
+    <title>Create Task</title>
+</head>
+
+<body class="mb-4">
+    <div class="flex p-4 bg-white">
+        <div class="grow"><img class="w-40" src="../Logo.png" alt="" srcset="" /></div>
+        <div class="flex items-center gap-x-2">
+            <a class="slds-button slds-button_brand" href="./home.html">Back</a>
         </div>
-        <div class="flex justify-center">
-            <div class="mt-4 w-full mx-4">
-                <div class="slds-form-element slds-form-element_stacked">
-                    <div class="slds-form-element__control">
-                        <h1 class="text-center text-xl" id="header">Edit Task</h1>
-                    </div>
+    </div>
+    <div class="flex justify-center">
+        <div class="mt-4 w-full mx-4">
+            <div class="slds-form-element slds-form-element_stacked">
+                <div class="slds-form-element__control">
+                    <h1 class="text-center text-xl" id="header">Edit Task</h1>
                 </div>
-                <form id="editTaskForm" class="mx-auto">
-                    <div class="slds-form">
-                        <div class="slds-form-element slds-form-element_stacked">
-                            <label class="slds-form-element__label" for="form-element-01">Task Name</label>
+            </div>
+            <form id="editTaskForm" class="mx-auto">
+                <div class="slds-form">
+                    <div class="slds-form-element slds-form-element_stacked">
+                        <label class="slds-form-element__label" for="form-element-01">Task Name</label>
 
-                            <div class="slds-form-element__control">
-                                <input required type="text" name="name" placeholder="Enter Task Name" class="slds-input" />
-                            </div>
+                        <div class="slds-form-element__control">
+                            <input required type="text" name="name" placeholder="Enter Task Name" class="slds-input" />
                         </div>
-                        <div class="slds-form-element">
-                            <label class="slds-form-element__label" for="lookupOwner">Owner</label>
-                            <div class="slds-form-element__control">
-                                <div class="slds-combobox_container">
-                                    <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
-                                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
-                                            <input
-                                                required
-                                                type="text"
-                                                class="slds-input slds-combobox__input slds-combobox__input-value"
-                                                id="lookupOwner"
-                                                aria-activedescendant="option1"
-                                                aria-autocomplete="list"
-                                                aria-controls="lookupOwnerList"
-                                                aria-expanded="true"
-                                                aria-haspopup="listbox"
-                                                autocomplete="off"
-                                                role="combobox"
-                                                name="owner"
-                                                placeholder="Search Owner..."
-                                            />
-                                            <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
-                                                <svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
-                                                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#search"></use>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                        <div style="display: none;" id="lookupOwnerList" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid" role="listbox">
-                                            <ul class="slds-listbox slds-listbox_vertical" role="presentation" id="OwnersList"></ul>
-                                        </div>
+                    </div>
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="lookupOwner">Owner</label>
+                        <div class="slds-form-element__control">
+                            <div class="slds-combobox_container">
+                                <div
+                                    class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                        role="none">
+                                        <input required type="text"
+                                            class="slds-input slds-combobox__input slds-combobox__input-value"
+                                            id="lookupOwner" aria-activedescendant="option1" aria-autocomplete="list"
+                                            aria-controls="lookupOwnerList" aria-expanded="true" aria-haspopup="listbox"
+                                            autocomplete="off" role="combobox" name="owner"
+                                            placeholder="Search Owner..." />
+                                        <span
+                                            class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                            <svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default"
+                                                aria-hidden="true">
+                                                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#search">
+                                                </use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div style="display: none;" id="lookupOwnerList"
+                                        class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid"
+                                        role="listbox">
+                                        <ul class="slds-listbox slds-listbox_vertical" role="presentation"
+                                            id="OwnersList"></ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="flex w-full gap-x-2">
-                            <div class="slds-form-element slds-form-element_stacked flex-1">
-                                <label class="slds-form-element__label" for="form-element-01">Status</label>
-                                <div class="slds-form-element__control">
-                                    <div class="slds-select_container">
-                                        <select name="status" id="taskstatus" class="slds-select"></select>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <div class="slds-form-element slds-form-element_stacked flex-1">
-                                <label class="slds-form-element__label" for="form-element-02">New Dropdown</label>
-                                <div class="slds-form-element__control">
-                                    <div class="slds-select_container">
-                                        <select name="type" id="tasktype" class="slds-select"></select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-
-                        <div class="slds-form-element slds-form-element_stacked">
-                            <label class="slds-form-element__label" for="form-element-01">Notes</label>
-
+                    </div>
+                    <div class="flex w-full gap-x-2">
+                        <div class="slds-form-element slds-form-element_stacked flex-1">
+                            <label class="slds-form-element__label" for="form-element-01">Status</label>
                             <div class="slds-form-element__control">
-                                <textarea required name="description" placeholder="Enter Notes…" class="slds-textarea"></textarea>
-                            </div>
-                        </div>
-                        <div class="flex w-full gap-x-2">
-                            <div class="slds-form-element slds-form-element_stacked">
-                                <label class="slds-form-element__label" for="form-element-01">Start Date</label>
-
-                                <div class="slds-form-element__control flex gap-4">
-                                    <input required type="date" name="start_date" placeholder="Enter Start Date" class="slds-input" />
-                                </div>
-                            </div>
-                            <div class="slds-form-element slds-form-element_stacked">
-                                <label class="slds-form-element__label" for="form-element-01">Start Time</label>
-
-                                <div class="slds-form-element__control flex gap-4">
-                                    <input required type="time" name="start_time" placeholder="Enter Start Time" class="slds-input" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex w-full gap-x-2" id="endtime">
-                            <div class="slds-form-element slds-form-element_stacked">
-                                <label class="slds-form-element__label" for="form-element-01">End Date</label>
-
-                                <div class="slds-form-element__control flex gap-4">
-                                    <input type="date" name="end_date" placeholder="Enter End Date" class="slds-input" />
-                                </div>
-                            </div>
-                            <div class="slds-form-element slds-form-element_stacked">
-                                <label class="slds-form-element__label" for="form-element-01">End Time</label>
-
-                                <div class="slds-form-element__control flex gap-4">
-                                    <input type="time" name="end_time" placeholder="Enter End Time" class="slds-input" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex w-full gap-x-2">
-                            <div class="slds-form-element slds-form-element_stacked">
-                                <label class="slds-form-element__label" for="form-element-01">Hours</label>
-
-                                <div class="slds-form-element__control flex gap-4">
-                                    <input type="number" name="hours" value="0" placeholder="Enter Default Hours" id="taskHours" class="slds-input" />
-                                </div>
-                            </div>
-                            <div class="slds-form-element slds-form-element_stacked">
-                                <label class="slds-form-element__label" for="form-element-01">Minutes</label>
-
-                                <div class="slds-form-element__control flex gap-4">
-                                    <input type="number" name="minutes" value="0" placeholder="Enter Default Minutes" id="taskMinutes" class="slds-input" />
+                                <div class="slds-select_container">
+                                    <select name="status" id="taskstatus" class="slds-select"></select>
                                 </div>
                             </div>
                         </div>
 
-                        <button class="slds-button slds-button_brand w-full mt-4" id="editTask" type="submit">Edit Task</button>
+                        <div class="slds-form-element slds-form-element_stacked flex-1">
+                            <label class="slds-form-element__label" for="tasktype">Task Type</label>
+                            <div class="slds-form-element__control">
+                                <div class="slds-select_container">
+                                    <select name="type" id="tasktype" class="slds-select"></select>
+                                </div>
+                            </div>
+                        </div>                        
                     </div>
 
-                    <script src="./axios.js"></script>
-                    <script src="./localCookie.js"></script>
-                    <script src="./api.js"></script>
-                    <script src="./tasks.js"></script>
-                    <script src="./edittask.js"></script>
-                </form>
-            </div>
+
+                    <div class="slds-form-element slds-form-element_stacked">
+                        <label class="slds-form-element__label" for="form-element-01">Notes</label>
+
+                        <div class="slds-form-element__control">
+                            <textarea required name="description" placeholder="Enter Notes…"
+                                class="slds-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="flex w-full gap-x-2">
+                        <div class="slds-form-element slds-form-element_stacked">
+                            <label class="slds-form-element__label" for="form-element-01">Start Date</label>
+
+                            <div class="slds-form-element__control flex gap-4">
+                                <input required type="date" name="start_date" placeholder="Enter Start Date"
+                                    class="slds-input" />
+                            </div>
+                        </div>
+                        <div class="slds-form-element slds-form-element_stacked">
+                            <label class="slds-form-element__label" for="form-element-01">Start Time</label>
+
+                            <div class="slds-form-element__control flex gap-4">
+                                <input required type="time" name="start_time" placeholder="Enter Start Time"
+                                    class="slds-input" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex w-full gap-x-2" id="endtime">
+                        <div class="slds-form-element slds-form-element_stacked">
+                            <label class="slds-form-element__label" for="form-element-01">End Date</label>
+
+                            <div class="slds-form-element__control flex gap-4">
+                                <input type="date" name="end_date" placeholder="Enter End Date" class="slds-input" />
+                            </div>
+                        </div>
+                        <div class="slds-form-element slds-form-element_stacked">
+                            <label class="slds-form-element__label" for="form-element-01">End Time</label>
+
+                            <div class="slds-form-element__control flex gap-4">
+                                <input type="time" name="end_time" placeholder="Enter End Time" class="slds-input" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex w-full gap-x-2">
+                        <div class="slds-form-element slds-form-element_stacked">
+                            <label class="slds-form-element__label" for="form-element-01">Hours</label>
+
+                            <div class="slds-form-element__control flex gap-4">
+                                <input type="number" name="hours" value="0" placeholder="Enter Default Hours"
+                                    id="taskHours" class="slds-input" />
+                            </div>
+                        </div>
+                        <div class="slds-form-element slds-form-element_stacked">
+                            <label class="slds-form-element__label" for="form-element-01">Minutes</label>
+
+                            <div class="slds-form-element__control flex gap-4">
+                                <input type="number" name="minutes" value="0" placeholder="Enter Default Minutes"
+                                    id="taskMinutes" class="slds-input" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="slds-button slds-button_brand w-full mt-4" id="editTask" type="submit">Edit
+                        Task</button>
+                </div>
+
+                <script src="./axios.js"></script>
+                <script src="./localCookie.js"></script>
+                <script src="./api.js"></script>
+                <script src="./tasks.js"></script>
+                <script src="./edittask.js"></script>
+            </form>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
