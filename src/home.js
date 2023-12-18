@@ -12,22 +12,6 @@ document.getElementById("logout").onclick = () => {
     chrome.runtime.sendMessage({ name: 'logout' });
     window.location = "./index.html";
 };
-// try {
-//     chrome.runtime.onMessage.addListener(function (message) {
-//         // console.log(message.message.data.task_id)
-//         let index = taskList.getIndexFromId(message.message.data.task_id)
-//         // console.log(taskList.data[index])
-//         console.log(index,`${message.hoursElapsed}h ${message.minutesElapsed}m ${message.secondsElapsed}s`,document.getElementById("clock" + message.message.data.task_id))
-//         if(taskList.data[index]){
-//             taskList.data[index].hours = message.hoursElapsed;
-//             taskList.data[index].minutes = message.minutesElapsed;
-//             document.getElementById("clock" + message.message.data.task_id).innerHTML = `${message.hoursElapsed}h ${message.minutesElapsed}m ${message.secondsElapsed}s`;
-//         }
-
-//     });
-// } catch (error) {
-//     console.error('Error handling message:', error);
-// }
 
 try {
     chrome.runtime.onMessage.addListener(function (message) {

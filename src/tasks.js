@@ -227,22 +227,22 @@ class Tasks {
                 <div class="flex bg-gray-200 text-lg p-1 status" data-info="${el.task_id},${el.status}">
                     <div class="grow text-sm p-1" style="margin: auto;">${el.start_date} ${el.end_date ? ' / ' : '' } ${el.end_date}</div>
                     <div id="clock${el.task_id}" class="text-sm" style="margin: auto;">${el.hours}:${el.minutes}</div>
-                    <span   id="edit${el.task_id},${el.start_date},${el.end_date},${el.user_name},${el.user_id},${el.project_id},${el.description},${el.name},${el.type},${el.hours},${el.minutes},${el.status}" class=" click slds-icon_container slds-icon-utility-announcement slds-current-color mx-2" 
+                    <span   id="edit ${el.task_id},${el.start_date},${el.end_date},${el.user_name},${el.user_id},${el.project_id},${el.description},${el.name},${el.type},${el.hours},${el.minutes},${el.status}" class=" click slds-icon_container slds-icon-utility-announcement slds-current-color mx-2" 
                     title="To Edit This Task">
                     <svg class="slds-icon slds-icon_small" style="width:15px;fill: #0176d3;" aria-hidden="true">
                         <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use>
                     </svg>
                     <span class="slds-assistive-text">To Edit This Task</span>
                 </span>
-                <div id="timmer${el.task_id}" >
-                <span id="start${el.task_id}" obj='${JSON.stringify(el)}' style="display:${el.status !== 'In Progress' ? 'block;' : 'none;'}"  class=" click slds-icon_container slds-icon-utility-announcement slds-current-color  mx-2 " 
+                <div id="timer${el.task_id}" >
+                <span id="start ${el.task_id}" obj='${JSON.stringify(el)}' style="display:${el.status !== 'In Progress' ? 'block;' : 'none;'}"  class=" click slds-icon_container slds-icon-utility-announcement slds-current-color  mx-2 " 
                     title="Start">
                     <svg class="slds-icon slds-icon_small" style="width:15px;fill: #45c65a ;" aria-hidden="true">
                         <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#play"></use>
                     </svg>
                     <span class="slds-assistive-text">Start</span>
                 </span>
-                <span id="stop${el.task_id}" obj='${JSON.stringify(el)}' style="display:${el.status == 'In Progress' ? 'block;' : 'none;'}"  class=" click slds-icon_container slds-icon-utility-announcement slds-current-color mx-2 "
+                <span id="stop ${el.task_id}" obj='${JSON.stringify(el)}' style="display:${el.status == 'In Progress' ? 'block;' : 'none;'}"  class=" click slds-icon_container slds-icon-utility-announcement slds-current-color mx-2 "
                 title="Pause">
                 <svg class="slds-icon slds-icon_small" aria-hidden="true" style="width:15px;fill: green;">
                     <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#pause"></use>
@@ -251,7 +251,7 @@ class Tasks {
                 </span>
                 </div>
                 
-                <span id="del${el.task_id}" style="display:${el.can_delete ? 'block' : 'none'}" class=" click slds-icon_container slds-icon-utility-announcement slds-current-color  mx-2"
+                <span id="del ${el.task_id}" style="display:${el.can_delete ? 'block' : 'none'}" class=" click slds-icon_container slds-icon-utility-announcement slds-current-color  mx-2"
                     title="Delete This Task">
                     <svg class="slds-icon slds-icon_small" style="width:15px;fill: red;" aria-hidden="true">
                         <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#delete"></use>
@@ -292,17 +292,22 @@ class Tasks {
 
     reset() {
         this.owner = getCookie("login");
-        console.log('The Owner Is: ', this.owner)
+        console.log('The Owner Is: ', this.owner);
         this.project = [];
-        this.startDate = new Date().toISOString().substr(0, 10)
-        this.endDate = new Date().toISOString().substr(0, 10)
-        document.getElementById("lookupProject").value = null
-        document.getElementById("lookupOwner").value = null
-        document.getElementById("start_date").value = this.startDate
-        document.getElementById("end_date").value = this.endDate
-
+        this.startDate = new Date().toISOString().substr(0, 10);
+        this.endDate = new Date().toISOString().substr(0, 10);
+    
+        const lookupProject = document.getElementById("lookupProject");
+        const lookupOwner = document.getElementById("lookupOwner");
+        const startDateInput = document.getElementById("start_date");
+        const endDateInput = document.getElementById("end_date");
+    
+        lookupProject.value = null;
+        lookupOwner.value = null;
+        startDateInput.value = this.startDate;
+        endDateInput.value = this.endDate;
     }
-
+    
     getAll(con) {
         getAllTasks(this.owner, this.project, this.startDate + ' 00:00:00', this.endDate + ' 00:00:00').then((x) => {
             this.data = x;
@@ -310,6 +315,7 @@ class Tasks {
             this.events()
         })
     }
+
     getTotal(data) {
         let totalHours = 0;
         let totalMinutes = 0;
@@ -322,6 +328,7 @@ class Tasks {
         totalMinutes = totalMinutes % 60;
         return `${totalHours} Hours : ${totalMinutes} Minutes`
     }
+
     remove(id) {
         removeTask("task?task_id=" + id).then((x) => { this.getAll(false) })
         chrome.runtime.sendMessage({ name: 'pauseTracking', data: id });
@@ -341,9 +348,9 @@ class Tasks {
 
     edit(i, s, e, o, u, p, d, n, t, h, m, st) {
         let index = this.getIndexFromId(i)
-        let prams = new URLSearchParams(this.data[index]).toString();
-        window.location = './editTask.html?' + prams;
-        // window.location = './editTask.html?id=' + i + '&sd=' + s + '&ed=' + e + '&od=' + o + '&uid=' + u + '&pid=' + p + '&notes=' + d + '&name=' + n + '&type=' + t + '&hours=' + h + '&minutes=' + m + '&status=' + st;
+        let params = new URLSearchParams(this.data[index]).toString();
+        window.location = './editTask.html?' + params;
+        
     }
 
     stop(i) {
@@ -368,31 +375,31 @@ class Tasks {
             chrome.runtime.sendMessage({ name: 'startTracking', data: this.data[index], auth: this.owner });
             this.getAll(false)
         });
-
-
     }
+
     events() {
+        // Attach new event listeners
         document.querySelectorAll(".click").forEach((el) => {
             if (el.id.includes('start')) {
-                let id = el.id.replace('start', '');
+                let id = el.id.replace('start ', '');
                 el.onclick = () => {
                     this.start(id)
                 }
             }
             if (el.id.includes('stop')) {
-                let id = el.id.replace('stop', '');
+                let id = el.id.replace('stop ', '');
                 el.onclick = () => {
                     this.stop(id)
                 }
             }
             if (el.id.includes('del')) {
-                let id = el.id.replace('del', '');
+                let id = el.id.replace('del ', '');
                 el.onclick = () => {
                     this.remove(id)
                 }
             }
             if (el.id.includes('edit')) {
-                let v = el.id.replace('edit', '');
+                let v = el.id.replace('edit ', '');
                 let parts = v.split(",");
     
                 // Map parts to an object with meaningful property names
@@ -411,13 +418,13 @@ class Tasks {
                     minutes: parts[10],
                     status: parts[11]
                 };
-    
-                console.log('Task data for editing:', taskData);
-                            
+
+                // console.log('Task data for editing:', taskData);
                 el.onclick = () => {
                     this.edit(...Object.values(taskData));
                 }
             }
         });
     }
+
 }
