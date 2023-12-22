@@ -253,7 +253,6 @@ function search(url) {
                     resolve(result)
                 } else {
                     console.log(result);
-                    // alert(JSON.stringify(result))
                 }
             })
             .catch(error => {

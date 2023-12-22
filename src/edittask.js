@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load default task statuses from local storage
     var taskstatus = localStorage.getItem("default_task_status");
+    console.log('>>>>TaskStatus: ', taskstatus)
     if (taskstatus) {
         taskstatus.split(",").forEach((el) => {
             document.getElementById("taskstatus").innerHTML += `<option value="${el}">${el}</option>`;
