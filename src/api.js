@@ -1,33 +1,75 @@
 var APIURL = 'https://micronetbd.my.salesforce-sites.com/services/apexrest/';
 
 
-function makeHttpRequest(url, method, headers, data) {
-    // console.log('requestOptions', data)
+// function makeHttpRequest(url, method, headers, data) {
+//     // console.log('requestOptions', data)
+//     const requestOptions = {
+//         method: method,
+//         headers: headers,
+//         redirect: 'follow',
+//         url: APIURL + url
+//     };
+//     if (method === 'POST' || method === 'PUT' || method === 'PATCH') {
+//         requestOptions.data = data;
+//     } else {
+//         requestOptions.params = data;
+//     }
+
+//     return axios(requestOptions)
+//         .then(response => {
+//             // console.log('makeHttpRequest', response, data)
+//             if (response.data.success) {
+//                 return response.data;
+//             } else {
+//                 throw new Error(JSON.stringify(response.data));
+//             }
+//         })
+//         .catch(error => {
+//             throw error;
+//         });
+// }
+
+async function makeHttpRequest(url, method, headers, data) {
+    // Define the base URL for API requests
+
+    // Preparing request options
     const requestOptions = {
-        method: method,
-        headers: headers,
-        redirect: 'follow',
+        method,
+        headers,
         url: APIURL + url
     };
-    if (method === 'POST' || method === 'PUT' || method === 'PATCH') {
+
+    if (['POST', 'PUT', 'PATCH'].includes(method)) {
         requestOptions.data = data;
     } else {
         requestOptions.params = data;
     }
 
-    return axios(requestOptions)
-        .then(response => {
-            // console.log('makeHttpRequest', response, data)
-            if (response.data.success) {
-                return response.data;
-            } else {
-                throw new Error(JSON.stringify(response.data));
-            }
-        })
-        .catch(error => {
-            throw error;
-        });
+    try {
+        // Log request details for debugging
+        console.log(`Making HTTP request: ${method} ${APIURL + url}`, requestOptions);
+
+        // Making the HTTP request using Axios
+        const response = await axios(requestOptions);
+
+        // Log response data for verification
+        console.log(`Response received from ${url}:`, response.data);
+
+        // Check for success response
+        if (response.data.success) {
+            return response.data;
+        } else {
+            // Log error details if the success flag is not true
+            console.error(`Error in response from ${url}:`, response.data);
+            throw new Error(`Request failed: ${JSON.stringify(response.data)}`);
+        }
+    } catch (error) {
+        // Log and re-throw the error for the caller to handle
+        console.error(`Error in makeHttpRequest for ${url}:`, error);
+        throw error;
+    }
 }
+
 
 function login(value) {
     const formProps = Object.fromEntries(value);
@@ -83,7 +125,7 @@ function getAllTasks(owner, projects, startDate, endDate) {
                         case 'In Progress':
                             statusClass = 'slds-button_brand';
                             break;
-                        
+
                         default:
                             statusClass = 'slds-button_neutral';
                             break;
@@ -96,19 +138,19 @@ function getAllTasks(owner, projects, startDate, endDate) {
         }
         return tasks;
     }
-    function getInitials( name,delimeter ) {
-        if( name ) {
-            var array = name.split( delimeter );
-            switch ( array.length ) {
+    function getInitials(name, delimeter) {
+        if (name) {
+            var array = name.split(delimeter);
+            switch (array.length) {
                 case 1:
                     return array[0].charAt(0).toUpperCase();
                     break;
                 default:
-                    return array[0].charAt(0).toUpperCase() + array[ array.length -1 ].charAt(0).toUpperCase();
+                    return array[0].charAt(0).toUpperCase() + array[array.length - 1].charAt(0).toUpperCase();
             }
         }
         return false;
-    
+
     }
     return new Promise((resolve, reject) => {
         var headers = {
@@ -208,16 +250,11 @@ function getTask(payload) {
 function editTask(editdata) {
     return new Promise((resolve, reject) => {
 
-        console.log('editdata', editdata)
+        //console.log('editdata', editdata)
         var headers = {
             'task_manager_id': getCookie("login")
         };
-        // if (typeof editdata.description == "string") {
-        //     editdata.description = JSON.parse(editdata.description)
-        // } else {
-        //     editdata.description = JSON.stringify(editdata.description)
 
-        // }
         var urlencoded = new URLSearchParams();
         urlencoded.append("task_id", editdata.task_id);
         urlencoded.append("name", editdata.name);
@@ -284,6 +321,3 @@ function createProject(formProps) {
         }
     })
 }
-
-
-
