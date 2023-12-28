@@ -2,7 +2,6 @@ var Interval = {}
 var timeInterval = {}
 chrome.action.onClicked.addListener( (tab)=> {
         chrome.tabs.sendMessage(tab.id, {greeting: "hello"}, function(response) {
-              console.log(response);
         });
 })
 setInterval(() => {
@@ -77,15 +76,14 @@ function sendtime(message) {
             } catch (error) {
                 console.log(error)
             }
-            // console.log(timeInterval,message)
 
         }, 1000);
     }
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+
     if (message.name === 'startTracking') {
-        console.log(message)
 
         trackTime(message)
         sendtime(message)

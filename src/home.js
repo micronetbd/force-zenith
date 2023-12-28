@@ -15,7 +15,6 @@ document.getElementById("logout").onclick = () => {
 
 try {
     chrome.runtime.onMessage.addListener(function (message) {
-        // console.log('Received message:', message);
         
         // Check if message.message and message.message.data exist
         if (message.message && message.message.data) {

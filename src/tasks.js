@@ -293,7 +293,8 @@ class Tasks {
 
     reset() {
         this.owner = getCookie("login");
-        console.log('The Owner Is: ', this.owner);
+        // Log owner for debugging purposes
+        // console.log('The Owner Is: ', this.owner);
         this.project = [];
         this.startDate = new Date().toISOString().substr(0, 10);
         this.endDate = new Date().toISOString().substr(0, 10);

@@ -1,6 +1,5 @@
 var APIURL = 'https://micronetbd.my.salesforce-sites.com/services/apexrest/';
 
-
 // function makeHttpRequest(url, method, headers, data) {
 //     // console.log('requestOptions', data)
 //     const requestOptions = {
@@ -30,8 +29,6 @@ var APIURL = 'https://micronetbd.my.salesforce-sites.com/services/apexrest/';
 // }
 
 async function makeHttpRequest(url, method, headers, data) {
-    // Define the base URL for API requests
-
     // Preparing request options
     const requestOptions = {
         method,
@@ -47,13 +44,13 @@ async function makeHttpRequest(url, method, headers, data) {
 
     try {
         // Log request details for debugging
-        console.log(`Making HTTP request: ${method} ${APIURL + url}`, requestOptions);
+        //console.log(`Making HTTP request: ${method} ${APIURL + url}`, requestOptions);
 
         // Making the HTTP request using Axios
         const response = await axios(requestOptions);
 
         // Log response data for verification
-        console.log(`Response received from ${url}:`, response.data);
+        //console.log(`Response received from ${url}:`, response.data);
 
         // Check for success response
         if (response.data.success) {

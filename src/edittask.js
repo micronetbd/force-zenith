@@ -163,10 +163,10 @@ document.forms.editTaskForm.addEventListener('submit', (event) => {
     if (formProps.status === 'Completed') {
         console.log("Validating for Completed status");
 
-        // Add your specific validations for 'Completed' status here
+        // Add specific validations for 'Completed' status here
         if (!formProps.end_date || !formProps.end_time) {
             console.error("End date and time are required for 'Completed' status.");
-            // You can also prevent form submission here or display an error message.
+            // We can also prevent form submission here or display an error message.
         }
     }
 
@@ -191,6 +191,7 @@ function submitEditTaskForm() {
 
 // Build edit data from form properties
 function buildEditData(formProps) {
+
     
     var editdata = {
         name: formProps.name,
