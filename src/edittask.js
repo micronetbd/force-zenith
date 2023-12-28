@@ -14,9 +14,8 @@ function paramsToObject(entries) {
 // Handle changes in task status dropdown
 document.getElementById("taskstatus").onchange = () => {
     let ts = document.getElementById("taskstatus").value;
+    
     console.log("Task status changed to:", ts);
-
-    // Show or hide end time based on task status
     document.getElementById("endtime").style.display = ts == "Completed" ? 'flex' : 'none';
 };
 
@@ -50,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Setup the owner lookup functionality
     setupOwnerLookup();
 });
-
 
 // Set form values based on URL parameters
 function setFormValues(form, params) {
@@ -143,14 +141,15 @@ function updateOwnerList(e, data) {
 document.forms.editTaskForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    var form = document.querySelector('form');
+    const form = document.querySelector('form');
     const formData = new FormData(form);
     const formProps = Object.fromEntries(formData);
 
-    var editdata = {
+    const editdata = {
         name: formProps.name,
         owner: document.querySelector("#lookupOwner").getAttribute('data-info'),
         start_date: formProps.start_date + " " + formProps.start_time + ":00",
+        end_date: formProps.end_date ? formProps.end_date + " " + formProps.end_time + ":00" : "",
         description: formProps.description,
         status: formProps.status,
         project_id: urlParams.get("project_id"),
@@ -160,17 +159,10 @@ document.forms.editTaskForm.addEventListener('submit', (event) => {
         minutes: formProps.minutes
     };
 
-    // Check for 'Completed' status specific validations
-    if (formProps.status === 'Completed') {
-        console.log("Validating for Completed status");
+    // Log the structured clone of the object
+    console.dir(editdata);
 
-        // Add specific validations for 'Completed' status here
-        if (!formProps.end_date || !formProps.end_time) {
-            console.error("End date and time are required for 'Completed' status.");
-            // We can also prevent form submission here or display an error message.
-        }
-    }
-
+    // Perform form validation
     if (validateForm(form)) {
         performTaskEdit(editdata);
     } else {
@@ -190,13 +182,11 @@ function submitEditTaskForm() {
     }
 }
 
-// Build edit data from form properties
-function buildEditData(formProps) {
 
-    
+function buildEditData(formProps) {
     var editdata = {
         name: formProps.name,
-        owner: document.querySelector("#lookupOwner").getAttribute('data-info'),
+        owner: document.querySelector("#lookupOwner").getAttribute("data-info"),
         start_date: formProps.start_date + " " + formProps.start_time,
         end_date: formProps.end_date + " " + formProps.end_time,
         description: formProps.description,
@@ -205,13 +195,18 @@ function buildEditData(formProps) {
         type: formProps.type,
         task_id: urlParams.get("task_id"),
         hours: formProps.hours,
-        minutes: formProps.minutes
+        minutes: formProps.minutes,
     };
+
     if (new Date(editdata.end_date) == "Invalid Date") {
         delete editdata.end_date;
     }
+
+    console.log("Edit data built from form properties:", editdata);
+
     return editdata;
 }
+
 
 // Validate form fields
 function validateForm(form) {
@@ -241,7 +236,7 @@ function performTaskEdit(editdata) {
                 data: editdata.task_id,
             });
         }
-        window.location = "./home.html";
+        //window.location = "./home.html";
     });
 }
 

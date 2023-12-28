@@ -1,33 +1,5 @@
 var APIURL = 'https://micronetbd.my.salesforce-sites.com/services/apexrest/';
 
-// function makeHttpRequest(url, method, headers, data) {
-//     // console.log('requestOptions', data)
-//     const requestOptions = {
-//         method: method,
-//         headers: headers,
-//         redirect: 'follow',
-//         url: APIURL + url
-//     };
-//     if (method === 'POST' || method === 'PUT' || method === 'PATCH') {
-//         requestOptions.data = data;
-//     } else {
-//         requestOptions.params = data;
-//     }
-
-//     return axios(requestOptions)
-//         .then(response => {
-//             // console.log('makeHttpRequest', response, data)
-//             if (response.data.success) {
-//                 return response.data;
-//             } else {
-//                 throw new Error(JSON.stringify(response.data));
-//             }
-//         })
-//         .catch(error => {
-//             throw error;
-//         });
-// }
-
 async function makeHttpRequest(url, method, headers, data) {
     // Preparing request options
     const requestOptions = {
