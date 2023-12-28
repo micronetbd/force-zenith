@@ -13,10 +13,11 @@ function paramsToObject(entries) {
 
 // Handle changes in task status dropdown
 document.getElementById("taskstatus").onchange = () => {
-    let t = document.getElementById("taskstatus").value;
-    console.log("Task status changed to:", t);
+    let ts = document.getElementById("taskstatus").value;
+    console.log("Task status changed to:", ts);
+
     // Show or hide end time based on task status
-    document.getElementById("endtime").style.display = t == "Completed" ? 'flex' : 'none';
+    document.getElementById("endtime").style.display = ts == "Completed" ? 'flex' : 'none';
 };
 
 // When the DOM is fully loaded
