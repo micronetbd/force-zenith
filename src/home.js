@@ -25,7 +25,7 @@ try {
                 taskList.data[index].hours = message.hoursElapsed;
                 taskList.data[index].minutes = message.minutesElapsed;
                 
-                const clockElement = document.getElementById("clock" + message.message.data.task_id);
+                const clockElement = document.getElementById("clock " + message.message.data.task_id);
                 
                 if (clockElement) {
                     clockElement.innerHTML = `${message.hoursElapsed}h ${message.minutesElapsed}m ${message.secondsElapsed}s`;

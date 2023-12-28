@@ -5,6 +5,7 @@ class Tasks {
     }
 
     render() {
+        
         if (this.data.length < 1) {
             document.getElementById("TaskList").innerHTML = '';
             document.getElementById("TaskList").innerHTML = `
@@ -226,7 +227,7 @@ class Tasks {
                 <div class="mt-2">
                 <div class="flex bg-gray-200 text-lg p-1 status" data-info="${el.task_id},${el.status}">
                     <div class="grow text-sm p-1" style="margin: auto;">${el.start_date} ${el.end_date ? ' / ' : '' } ${el.end_date}</div>
-                    <div id="clock${el.task_id}" class="text-sm" style="margin: auto;">${el.hours}:${el.minutes}</div>
+                    <div id="clock ${el.task_id}" class="text-sm" style="margin: auto;">${el.hours}:${el.minutes}</div>
                     <span   id="edit ${el.task_id},${el.start_date},${el.end_date},${el.user_name},${el.user_id},${el.project_id},${el.description},${el.name},${el.type},${el.hours},${el.minutes},${el.status}" class=" click slds-icon_container slds-icon-utility-announcement slds-current-color mx-2" 
                     title="To Edit This Task">
                     <svg class="slds-icon slds-icon_small" style="width:15px;fill: #0176d3;" aria-hidden="true">
@@ -234,7 +235,7 @@ class Tasks {
                     </svg>
                     <span class="slds-assistive-text">To Edit This Task</span>
                 </span>
-                <div id="timer${el.task_id}" >
+                <div id="timer ${el.task_id}" >
                 <span id="start ${el.task_id}" obj='${JSON.stringify(el)}' style="display:${el.status !== 'In Progress' ? 'block;' : 'none;'}"  class=" click slds-icon_container slds-icon-utility-announcement slds-current-color  mx-2 " 
                     title="Start">
                     <svg class="slds-icon slds-icon_small" style="width:15px;fill: #45c65a ;" aria-hidden="true">
@@ -378,7 +379,7 @@ class Tasks {
     }
 
     events() {
-        // Attach new event listeners
+        // Attach new event listeners based on keywords in each <HTMLelement> id
         document.querySelectorAll(".click").forEach((el) => {
             if (el.id.includes('start')) {
                 let id = el.id.replace('start ', '');
