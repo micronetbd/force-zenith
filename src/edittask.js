@@ -236,7 +236,7 @@ function performTaskEdit(editdata) {
                 data: editdata.task_id,
             });
         }
-        //window.location = "./home.html";
+        window.location = "./home.html";
     });
 }
 
