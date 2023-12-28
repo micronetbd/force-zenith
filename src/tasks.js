@@ -309,12 +309,15 @@ class Tasks {
         endDateInput.value = this.endDate;
     }
     
-    getAll(con) {
-        getAllTasks(this.owner, this.project, this.startDate + ' 00:00:00', this.endDate + ' 00:00:00').then((x) => {
-            this.data = x;
+    // async version of previous getAll()
+    async getAll(con) {
+        try {
+            this.data = await getAllTasks(this.owner, this.project, this.startDate + ' 00:00:00', this.endDate + ' 00:00:00');
             if (!con) this.render();
-            this.events()
-        })
+            this.events();
+        } catch (error) {
+            console.error('Error getting tasks:', error);
+        }
     }
 
     getTotal(data) {

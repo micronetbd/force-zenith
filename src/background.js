@@ -59,7 +59,7 @@ function trackTime(message) {
             message.data.hours = hoursElapsed;
             message.data.minutes = minutesElapsed;
             update(message.data, message.auth);
-            // console.log(Interval)
+
         }, 6000);
     }
 }
@@ -82,8 +82,6 @@ function sendtime(message) {
         }, 1000);
     }
 }
-
-
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.name === 'startTracking') {
