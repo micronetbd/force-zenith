@@ -41,7 +41,7 @@ function update(data, auth) {
         redirect: 'follow'
     };
 
-    fetch("https://micronetbd--uat.sandbox.my.salesforce-sites.com/services/apexrest/task", requestOptions)
+    fetch("https://micronetbd.my.salesforce-sites.com/services/apexrest/task", requestOptions)
         .then(x => console.log(x))
         .catch((error) => { console.log(error) })
 }
