@@ -1,6 +1,7 @@
 
 document.querySelector("#lookupOwner").value = "Current User";
 document.querySelector("#lookupOwner").setAttribute('data-info', getCookie("login"));
+
 var tasktypes = localStorage.getItem('default_task_types')
 tasktypes = tasktypes.split(',');
 tasktypes.forEach(el => {
@@ -8,6 +9,7 @@ tasktypes.forEach(el => {
   <option value="${el}">${el}</option>
   `
 });
+
 var taskstatus = localStorage.getItem('default_task_status')
 taskstatus = taskstatus.split(',');
 taskstatus.forEach(el => {
@@ -15,6 +17,7 @@ taskstatus.forEach(el => {
   <option value="${el}">${el}</option>
   `
 });
+
 document.getElementById("taskstatus").onchange = (e) => {
   const value = e.target.value;
   if (value == "Completed") {
@@ -143,7 +146,3 @@ document.getElementById("lookupProject").onkeyup = (e) => {
   }, delay)
 
 }
-
-
-
-

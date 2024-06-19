@@ -2,7 +2,6 @@ var Interval = {}
 var timeInterval = {}
 chrome.action.onClicked.addListener( (tab)=> {
         chrome.tabs.sendMessage(tab.id, {greeting: "hello"}, function(response) {
-              console.log(response);
         });
 })
 setInterval(() => {
@@ -42,8 +41,8 @@ function update(data, auth) {
         redirect: 'follow'
     };
 
-    fetch("https://micronetbd--uat.sandbox.my.salesforce-sites.com/services/apexrest/task", requestOptions)
-        .then(x => console.log(x))
+    fetch("https://micronetbd.my.salesforce-sites.com/services/apexrest/task", requestOptions)
+        //.then(x => console.log(x))
         .catch((error) => { console.log(error) })
 }
 
@@ -59,7 +58,7 @@ function trackTime(message) {
             message.data.hours = hoursElapsed;
             message.data.minutes = minutesElapsed;
             update(message.data, message.auth);
-            // console.log(Interval)
+
         }, 6000);
     }
 }
@@ -77,17 +76,14 @@ function sendtime(message) {
             } catch (error) {
                 console.log(error)
             }
-            // console.log(timeInterval,message)
 
         }, 1000);
     }
 }
 
-
-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+
     if (message.name === 'startTracking') {
-        console.log(message)
 
         trackTime(message)
         sendtime(message)
