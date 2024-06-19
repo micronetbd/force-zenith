@@ -42,7 +42,7 @@ function update(data, auth) {
     };
 
     fetch("https://micronetbd.my.salesforce-sites.com/services/apexrest/task", requestOptions)
-        .then(x => console.log(x))
+        //.then(x => console.log(x))
         .catch((error) => { console.log(error) })
 }
 
